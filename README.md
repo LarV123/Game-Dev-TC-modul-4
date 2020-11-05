@@ -54,7 +54,13 @@ Setelah kita memainkan gamenya, ada 2 masalah yang muncul. Pertama player dapat 
 Seperti yang kita tahu, ```Rigidbody``` akan mengoverride attribut di transform seperti posisi, rotasi. Dalam ```rigidbody```, kita dapat membuat constraint agar ```rigidbody``` tidak mengubah suatu property dalam transform. Untuk ```Rigidbody2D``` dapat di setting di gambar berikut. Dapat dilihat kita dapat memberikan 3 constraint, yaitu Freeze Position X, Freeze Position Y, dan Freeze Rotation Z.  Sesuai dengan namanya, freeze position X berarti ```Rigidbody``` tidak akan mengubah posisi x object tersebut, kita tetap bisa mengubah valuenya jika mengubah transform akan tetapi ```Rigidbody``` tidak akan mengubah value tersebut sama sekali. Begitu juga berlaku untuk Freeze Position Y. Yang terakhir Freeze Rotation Z berarti Rigidbody tidak akan mengubah rotasi dari transform tersebut akan tetapi kita tetap bisa mengubah rotasi transform menggunakan komponen transform.
 
 ### Physics Material
+Dalam Collider kita dapat memberikan ```Physics Material```. Secara default, ```Physics Material``` akan diberi friction dan tidak ada bounciness. ```Physics Material``` digunakan untuk mengontrol bagaimana cara ```Rigidbody``` menkalkulasikan kecepatan saat ada collision antara 2 objek.
 
+### Membuat Physics Material
+Sebelum membuat Physics Material akan lebih baik membuat folder yang berisi semua Physics Material untuk mengelompokkan dan organizational purposes. Untuk kali ini foldernya akan bernama "Physics Material".
+
+Masuklah ke dalam folder tersebut, lalu klik kanan > Create > Physics Material 2D. Beri nama "Slippery". Setelah itu setting, frictionnya diubah menjadi 0.
+Dalam inspector, kita dapat mengubah friction dan bounciness. Friction akan menentukan bagaimana ```Rigidbody``` mengkalkulasikan bagaimana collision antar 2 benda yang bergesekan mengurangi kecepatan. Bounciness akan menentukan bagaimana Rigidbody mengkalkulasikan bagaimana collision antar 2 benda yang berbenturan mengaffect kecepatan. Jika bounciness berisi satu maka, objek yang bertabrakan akan mempunyai kecepatan yang sama namun berlawanan arah.
 
 ## Reference
 https://docs.unity3d.com/Manual/class-Tilemap.html
