@@ -111,13 +111,66 @@ Setelah membuat physics material. Klik object tilemap, lalu masukkan physics mat
 ![img](img/Collider-Physics-Material-Attribute.png)
 
 ## Animation
-Animasi merupakan hal yang penting dalam game. Animasi dalam game unity dihandle menggunakan Finite State Machine. Dimana kita akan mendefinisikan beberapa state, lalu kita dapat memberikan transisi antar state sesuai dengan variable yang kita buat di Animator tersebut. Script akan mengakses value variable di animator ini.
+Animasi merupakan hal yang penting dalam game. Animasi dalam game unity dihandle menggunakan Finite State Machine. Dimana kita akan mendefinisikan beberapa state, lalu kita dapat memberikan transisi antar state sesuai dengan variable yang kita buat di Animator tersebut. Script akan mengakses value variable di animator ini. Setiap state akan berisi informasi keyframe.
 
-Sebelum belajar animation.
+Sebelum belajar animation, kita buka window Animation dan window Animator.
+
+![img](img/Animations-Window.png)
 
 ### Animator
+```Animator``` merupakan komponen yang digunakan untuk mengkontrol state animasi dari variable parameter - parameter. Dalam komponen ```Animator``` kita akan memberi asset bernama ```Animation Controller```. ```Animation Controller``` merupakan asset yang bertugas memberi tahu bagaimana komponen mengkontrol state animasinya.
 
 ![img](img/Animator-How-It-Work.png)
+
+Untuk membuat suatu animasi, pertama kita harus menambahkan komponen ```Animator``` ke game object yang mau kita animasikan. Dalam project ini kita akan menambahkannya ke object Player.
+
+![img](img/Animator-Component.png)
+
+Dapat dilihat ada beberapa attribute dalam komponen tersebut. Untuk saat ini yang kita mau fokuskan adalah attribut ```Controller```. Selanjutnya kita buat ```Animation Controller``` asset. Sebelum itu kita buat folder bernama "Animation" untuk menyimpan semua asset mengenai animasi. Dalam folder "Animation" buatlah folder "Player" agar semua asset animasi player dapat kita taruh dalam folder "Player".
+
+Masuklah ke folder "Player" dan klik kanan lalu pilih Create > Animation Controller.
+
+![img](img/Create-Animation-Controller.png)
+
+Beri nama "Player" lalu tekan enter. Drag and drop asset tersebut ke attribute Controller di komponen ```Animator```.
+
+![img](img/Animator-Component-Controller-Assigned.png)
+
+Dengan ini kita bisa melihat Window Animator akan mempunyai tampilan seperti berikut saat kita menselect game object dengan komponen Animator.
+
+![img](img/Animator-Window-Empty.png)
+
+Berikut adalah scheme sprite sheet.
+
+![img](img/Animation-Scheme.png)
+
+Dapat dilihat dari skema animasi tersebut, akan dibutuhkan 6 state.
+
+Untuk membuat state kita dapat klik kanan di area state yang ada di window Animator lalu pilih Create-State > Empty. Tekan state yang sudah dibuat lalu beri nama menggunakan inspector. Buatlah 6 state sesuai dengan nama berikut.
+
+![img](img/Animator-Window-Full-No-Link.png)
+
+Dapat dilihat, akan ada minimal satu state yang tersambung dengan state Entry. State yang tersambung dengan state entry adalah state yang pertama kali dimasuki oleh Animator Controller.
+
+Selanjutnya kita buat variable untuk parameter Animator. Untuk membuat parameter, klik simbol tambah di sisi atas kanan panel kiri. Disini kita dapat membuat beberapa jenis variable. Untuk ini, kita ingin variabel bool untuk IsUp, IsRunning, IsShooting. Buatlah 2 variabel tersebut. 
+
+Setelah itu buat transisi antar state Idle ke run dengan klik kanan di state Idle, lalu pilih Make Transition selanjutnya klik ke Run. Dengan ini akan ada transisi. Jika garis panah yang menghubungkan kedua state, kita bisa mengubah beberapa atribute.
+
+![img](img/Animation-Transition-Setting.png)
+
+Disini, yang mau kita ubah adalah Has Exit Time, Transition Duration, dan Conditions. Has Exit Time berarti animasi akan berganti setelah kondisi terpenuhi dan mencapai exit time tertentu. Ini kita uncheck agar animasi langsung berubah setelah kondisinya tercapai. Transition duration adalah durasi sebelum animasi melakukan transisi ke animasi selanjutnya. Pada 3D animation ini akan memberikan inbetween frame. Sayangnya pada animation frame based tidak akan merubah apapun dan hanya memberikan delay sebelum animasi berubah. Maka kita beri 0 juga. Yang terakhir merupakan Kondisi, dimana kita dapat memberikan kondisi kapan transisi ini akan aktif. Jika kita memberikan lebih dari satu kondisi maka untuk transisi aktif semua kondisi tersebut harus benar.
+
+Note : Untuk state A dan B kita bisa memberikan lebih dari satu transisi. Jadi pada transisi 1 dan yang lainnya akan berfungsi sebagai OR.
+
+Buatlah transisi dengan kondisi seperti berikut dan settingan has exit dan transision duration sama.
+
+1. Idle -> Run : IsRunning == True, IsShooting == False
+2. Idle -> Shoot : IsShooting == True
+3. Run -> Idle : IsRunning == False, IsShooting == False
+4. Run -> Shoot : IsShooting == True
+5. Shoot -> Run : IsShooting == False, IsRunning == True
+6. Shoot -> Idle : IsShotting == False, IsRunning == False
+7. Any -> IdleUp : IsUp == true
 
 ### Animation
 
